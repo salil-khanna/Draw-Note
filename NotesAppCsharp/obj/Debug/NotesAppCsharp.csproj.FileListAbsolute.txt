@@ -8,3 +8,17 @@ C:\Users\salil\Desktop\Coding Stuf\Notes App\NotesAppCsharp\obj\Debug\NotesAppCs
 C:\Users\salil\Desktop\Coding Stuf\Notes App\NotesAppCsharp\obj\Debug\NotesAppCsharp.csproj.CoreCompileInputs.cache
 C:\Users\salil\Desktop\Coding Stuf\Notes App\NotesAppCsharp\obj\Debug\NotesAppCsharp.exe
 C:\Users\salil\Desktop\Coding Stuf\Notes App\NotesAppCsharp\obj\Debug\NotesAppCsharp.pdb
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\NotesAppCsharp.exe.config
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\NotesAppCsharp.exe
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\NotesAppCsharp.pdb
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.csprojAssemblyReference.cache
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.Login.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.NoteApp.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.Properties.Resources.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.csproj.GenerateResource.cache
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.csproj.CoreCompileInputs.cache
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.exe
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.pdb
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.CreateUser.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.ForgetPassword.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.DeleteUser.resources

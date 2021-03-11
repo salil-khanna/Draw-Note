@@ -16,7 +16,8 @@ namespace NotesAppCsharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NoteApp());
+            Application.Run(new Login());
+
         }
     }
 }
