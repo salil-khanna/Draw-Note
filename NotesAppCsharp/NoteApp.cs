@@ -124,12 +124,24 @@ namespace NotesAppCsharp
                 using (sqlcon)
                 {
                     sqlcon.Open();
-                    query = "UPDATE [dbo].[Table1] SET NoteName = '" + noteName + "', NoteContent = '" + noteContent +
-                        "', ImageName = CONVERT(varbinary, @bytes) WHERE noteId = '" + noteIndex + "'";
+
+                    if (curImage != null)
+                    {
+                        query = "UPDATE [dbo].[Table1] SET NoteName = '" + noteName + "', NoteContent = '" + noteContent +
+                                                "', ImageName = CONVERT(varbinary, @bytes) WHERE noteId = '" + noteIndex + "'";
+                    } else
+                    {
+                        query = "UPDATE [dbo].[Table1] SET NoteName = '" + noteName + "', NoteContent = '" + noteContent +
+                                                "' WHERE noteId = '" + noteIndex + "'";
+                    }
+                    
                     using (SqlCommand command = new SqlCommand(query, sqlcon))
                     {
-
-                        command.Parameters.Add("@bytes", SqlDbType.VarBinary).Value = convert;
+                        if (curImage != null)
+                        {
+                            command.Parameters.Add("@bytes", SqlDbType.VarBinary).Value = convert;
+                        }
+                        
                         command.ExecuteNonQuery();
                         
                         this.openedNote = false;
@@ -240,10 +252,21 @@ namespace NotesAppCsharp
             Integrated Security=True;Connect Timeout=30");
             string query;
             SqlCommand command;
-            int index = noteNames.CurrentCell.RowIndex;
+            //if ()
+
+            int index;
+            try
+            {
+                index = (int) noteNames.CurrentCell.RowIndex;
+            } catch
+            {
+                MessageBox.Show("You can not delete a blank note!");
+                return;
+            }
+            
             if (this.openedNote == true || index > -1)
             {
-
+                
                 if (openedNote)
                 {
                     table.Rows.RemoveAt(openedIndex);
