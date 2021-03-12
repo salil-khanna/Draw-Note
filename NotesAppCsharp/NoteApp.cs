@@ -18,6 +18,9 @@ namespace NotesAppCsharp
         int openedIndex;
         int noteIndex;
         Image curImage = null;
+        SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
+            AttachDbFilename=C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\loginInfo.mdf;
+            Integrated Security=True;Connect Timeout=30");
 
         public NoteApp(int userId, string name)
         {
@@ -31,9 +34,7 @@ namespace NotesAppCsharp
         private void NoteApp_Load(object sender, EventArgs e)
         {
             //string appPath = Path.GetDirectoryName(Application.ExecutablePath);
-            SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
-            AttachDbFilename=C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\loginInfo.mdf;
-            Integrated Security=True;Connect Timeout=30");
+            
             string query = "Select * from [dbo].[Table1] Where userId = '" + this.userId + "' order by noteId desc";
             sqlcon.Open();
 
@@ -188,16 +189,14 @@ namespace NotesAppCsharp
             
 
 
-            SqlConnection sqlcon1 = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
-            AttachDbFilename=C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\loginInfo.mdf;
-            Integrated Security=True;Connect Timeout=30");
-            sqlcon1.Open();
+            
+            sqlcon.Open();
             string query1 = "Select noteId from [dbo].[Table1] Where NoteName = '" + noteName + "' AND NoteContent = '" + noteContent + "'";
 
-            SqlDataAdapter sda = new SqlDataAdapter(query1, sqlcon1);
+            SqlDataAdapter sda = new SqlDataAdapter(query1, sqlcon);
             DataTable temp = new DataTable();
             sda.Fill(temp);
-            sqlcon1.Close();
+            sqlcon.Close();
 
             int lastRow = temp.Rows.Count;
             int noteId = (int) temp.Rows[lastRow - 1][0];
@@ -247,9 +246,7 @@ namespace NotesAppCsharp
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 
-            SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
-            AttachDbFilename=C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\loginInfo.mdf;
-            Integrated Security=True;Connect Timeout=30");
+            
             string query;
             SqlCommand command;
             //if ()
