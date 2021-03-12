@@ -13,7 +13,8 @@ namespace NotesAppCsharp
 {
     public partial class CreateUser : Form
     {
-        public CreateUser()
+        Login form;
+        public CreateUser(string user, string password, Login form)
         {
             InitializeComponent();
 
@@ -21,6 +22,9 @@ namespace NotesAppCsharp
             comboBoxSecret.Items.Add("Favorite food?");
             comboBoxSecret.Items.Add("Favorite holiday?");
             comboBoxSecret.Items.Add("Favorite candy?");
+            textBoxUsername.Text = user;
+            textBoxPassword.Text = password;
+            this.form = form;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -103,6 +107,9 @@ namespace NotesAppCsharp
                 }
             }
 
+            Login newLoginApp = new Login(username, password);
+            newLoginApp.Show();
+            form.Hide();
             this.Close();
         }
     }

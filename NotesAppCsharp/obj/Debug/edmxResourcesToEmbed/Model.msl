@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="loginInfoModelStoreContainer" CdmEntityContainer="loginInfoEntities">
+    <EntitySetMapping Name="Table1">
+      <EntityTypeMapping TypeName="loginInfoModel.Table1">
+        <MappingFragment StoreEntitySet="Table1">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="NoteName" ColumnName="NoteName" />
+          <ScalarProperty Name="NoteContent" ColumnName="NoteContent" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="noteId" ColumnName="noteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

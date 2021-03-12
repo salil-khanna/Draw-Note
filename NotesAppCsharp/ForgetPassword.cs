@@ -13,13 +13,14 @@ namespace NotesAppCsharp
 {
     public partial class ForgetPassword : Form
     {
-        public ForgetPassword()
+        public ForgetPassword(string user)
         {
             InitializeComponent();
             comboBoxSecret.Items.Add("Favorite color?");
             comboBoxSecret.Items.Add("Favorite food?");
             comboBoxSecret.Items.Add("Favorite holiday?");
             comboBoxSecret.Items.Add("Favorite candy?");
+            textBoxUsername.Text = user;
         }
 
         private void exitButton_Click(object sender, EventArgs e)

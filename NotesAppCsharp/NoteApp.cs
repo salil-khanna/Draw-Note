@@ -2,6 +2,9 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace NotesAppCsharp
 {
@@ -14,6 +17,7 @@ namespace NotesAppCsharp
         bool openedNote = false;
         int openedIndex;
         int noteIndex;
+        Image curImage = null;
 
         public NoteApp(int userId, string name)
         {
@@ -45,11 +49,11 @@ namespace NotesAppCsharp
             {
                 titleofapp.Text = "Welcome back to Draw Note " + this.name + "!";
             }
-            
+            labelUploaded.Text = "No";
             noteNames.DataSource = table;
             noteNames.Columns["userId"].Visible = false;
             noteNames.Columns["NoteContent"].Visible = false;
-            noteNames.Columns["Image"].Visible = false;
+            noteNames.Columns["ImageName"].Visible = false;
             noteNames.Columns["noteId"].Visible = false;
             noteNames.Columns["NoteName"].Width = 220;
             sqlcon.Close();
@@ -60,6 +64,8 @@ namespace NotesAppCsharp
         {
 
             this.openedNote = false;
+            this.curImage = null;
+            labelUploaded.Text = "No";
             textBoxNoteName.Clear();
             textBoxNoteContent.Clear();
 
@@ -103,7 +109,14 @@ namespace NotesAppCsharp
             AttachDbFilename=C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\loginInfo.mdf;
             Integrated Security=True;Connect Timeout=30");
             string query;
-            
+
+
+            byte[] convert = null;
+            if (curImage != null)
+            {
+                convert = ConvertImageToBinary(curImage);
+            }
+
             if (this.openedNote == true)
             {
                 table.Rows.RemoveAt(openedIndex);
@@ -111,11 +124,12 @@ namespace NotesAppCsharp
                 using (sqlcon)
                 {
                     sqlcon.Open();
-                    query = "UPDATE [dbo].[Table1] SET NoteName = '" + noteName + "', NoteContent = '" + noteContent + "' WHERE noteId = '" + noteIndex + "'";
+                    query = "UPDATE [dbo].[Table1] SET NoteName = '" + noteName + "', NoteContent = '" + noteContent +
+                        "', ImageName = CONVERT(varbinary, @bytes) WHERE noteId = '" + noteIndex + "'";
                     using (SqlCommand command = new SqlCommand(query, sqlcon))
                     {
-                        
-                        command.CommandType = CommandType.Text; 
+
+                        command.Parameters.Add("@bytes", SqlDbType.VarBinary).Value = convert;
                         command.ExecuteNonQuery();
                         
                         this.openedNote = false;
@@ -130,7 +144,14 @@ namespace NotesAppCsharp
                 using (sqlcon)
                 {
                     sqlcon.Open();
-                    query = "INSERT INTO [dbo].[Table1] (userId, NoteName, NoteContent) VALUES (@userId, @noteName, @content)";
+                    if (curImage == null)
+                    {
+                        query = "INSERT INTO [dbo].[Table1] (userId, NoteName, NoteContent) VALUES (@userId, @noteName, @content)";
+                    } else
+                    {
+                        query = "INSERT INTO [dbo].[Table1] (userId, NoteName, NoteContent, ImageName) VALUES (@userId, @noteName, @content, @image)";
+                    }
+                    
 
                     using (SqlCommand command = new SqlCommand(query, sqlcon))
                     {
@@ -138,15 +159,21 @@ namespace NotesAppCsharp
                         command.Parameters.AddWithValue("@userId", this.userId);
                         command.Parameters.AddWithValue("@noteName", noteName);
                         command.Parameters.AddWithValue("@content", noteContent);
+                        if (curImage != null)
+                        {
+                            command.Parameters.AddWithValue("@image", convert);
+                        }
+
                         
                         command.ExecuteNonQuery();
-                        
-                        
+                        sqlcon.Close();
+
+
                     }
                 }
                 
             }
-            sqlcon.Close();
+            
 
 
             SqlConnection sqlcon1 = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;
@@ -165,9 +192,10 @@ namespace NotesAppCsharp
 
 
 
-            table.Rows.Add(this.userId, noteName, noteContent, null, noteId);
+            table.Rows.Add(this.userId, noteName, noteContent, convert, noteId);
 
-
+            this.curImage = null;
+            labelUploaded.Text = "No";
             textBoxNoteName.Clear();
             textBoxNoteContent.Clear();
         }
@@ -180,13 +208,28 @@ namespace NotesAppCsharp
                 string noteName = table.Rows[index].ItemArray[1].ToString();
                 string noteContent = table.Rows[index].ItemArray[2].ToString();
 
+                Image noteImage;
+                if (table.Rows[index][3] == DBNull.Value)
+                {
+                    labelUploaded.Text = "No";
+                    noteImage = null;
+                }
+                else
+                {
+
+                    labelUploaded.Text = "Yes";
+                    noteImage = ConvertBinaryToImage((byte []) table.Rows[index][3]);
+                    
+                }
+
+
                 textBoxNoteName.Text = noteName;
                 textBoxNoteContent.Text = noteContent;
                 this.openedNote = true;
                 this.openedIndex = index;
                 
                 this.noteIndex = (int) table.Rows[index][4];
-                System.Diagnostics.Debug.WriteLine(noteIndex);
+                this.curImage = noteImage;
             }
         }
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -197,18 +240,32 @@ namespace NotesAppCsharp
             Integrated Security=True;Connect Timeout=30");
             string query;
             SqlCommand command;
-            if (this.openedNote == true)
+            int index = noteNames.CurrentCell.RowIndex;
+            if (this.openedNote == true || index > -1)
             {
-                table.Rows.RemoveAt(openedIndex);
+
+                if (openedNote)
+                {
+                    table.Rows.RemoveAt(openedIndex);
+                    query = "DELETE FROM [dbo].[Table1]  WHERE noteId = '" + noteIndex + "'";
+                } else
+                {
+                    int noteVal = (int)table.Rows[index][4];
+                    table.Rows.RemoveAt(index);
+                    query = "DELETE FROM [dbo].[Table1]  WHERE noteId = '" + noteVal + "'";
+                }
+                
 
                 sqlcon.Open();
-                query = "DELETE FROM [dbo].[Table1]  WHERE noteId = '" + noteIndex + "'";
+                
                 command = new SqlCommand(query, sqlcon);
                 command.ExecuteNonQuery();
                 sqlcon.Close();
                 this.openedNote = false;
+                labelUploaded.Text = "No";
                 textBoxNoteName.Clear();
                 textBoxNoteContent.Clear();
+                this.curImage = null;
             }
         }
 
@@ -220,29 +277,40 @@ namespace NotesAppCsharp
                 if(ofd.ShowDialog() == DialogResult.OK)
                 {
                     fileName = ofd.FileName;
-                    //lblFileName.Text = fileName;
-                    //pictureBox1.Image = Image.FromFile(fileName);
+                    Image image = Image.FromFile(fileName);
+                    curImage = image;
+                    ImageViewer newViewer = new ImageViewer(image);
+                    newViewer.Show();
+
                 }
+                labelUploaded.Text = "Yes";
             }
+        }
+
+        public void setImage(byte[] set)
+        {
+            labelUploaded.Text = "Yes";
+            Image temp = ConvertBinaryToImage(set);
+            curImage = temp;
+            
         }
 
         private void drawImageButton_Click(object sender, EventArgs e)
         {
-
+            DrawTool drawTool = new DrawTool(this);
+            drawTool.Show();
         }
 
-        private void buttonViewInPaint_Click(object sender, EventArgs e)
+        private void buttonView_Click(object sender, EventArgs e)
         {
-
-            string filePath = @"""C:\Users\salil\Desktop\Coding Stuf\Notes App\NotesAppCsharp\TestPhotos\Hawaii.jpg"""; //temp path, later to sql database
-
-            System.Diagnostics.ProcessStartInfo procInfo = new System.Diagnostics.ProcessStartInfo
+            if (curImage == null)
             {
-                FileName = "mspaint.exe",
-                Arguments = filePath //Full Path to an image
-            };
+                MessageBox.Show("There is no image to view!");
+                return;
+            }
+            ImageViewer newViewer = new ImageViewer(curImage);
+            newViewer.Show();
 
-            System.Diagnostics.Process.Start(procInfo);
         }
 
         private void buttonLogOut_Click(object sender, EventArgs e)
@@ -259,5 +327,39 @@ namespace NotesAppCsharp
             newDeleteApp.Show();
 
         }
+
+        byte [] ConvertImageToBinary(Image img)
+        {
+            using (MemoryStream m = new MemoryStream())
+            {
+                img.Save(m, img.RawFormat);
+                byte[] data = m.ToArray();
+                Convert.ToBase64String(data);
+                            
+                
+                return data;
+            }
+
+           
+        }
+
+        Image ConvertBinaryToImage(byte [] data)
+        {
+            string base64string = Convert.ToBase64String(data);
+
+            Image convert = null; 
+            try
+            {
+                convert = Image.FromStream(new MemoryStream(Convert.FromBase64String(base64string)));
+            } catch
+            {
+                MessageBox.Show("Image File was corrupted...");
+                labelUploaded.Text = "Yes";
+                return convert;
+            }
+            
+            return convert;
+        }
+
     }
 }

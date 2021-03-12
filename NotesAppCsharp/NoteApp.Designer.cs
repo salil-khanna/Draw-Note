@@ -40,7 +40,7 @@
             this.uploadImageButton = new System.Windows.Forms.Button();
             this.imageStatusLabel = new System.Windows.Forms.Label();
             this.labelUploaded = new System.Windows.Forms.Label();
-            this.buttonViewInPaint = new System.Windows.Forms.Button();
+            this.buttonView = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
@@ -186,25 +186,26 @@
             // 
             this.labelUploaded.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUploaded.AutoSize = true;
-            this.labelUploaded.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelUploaded.Location = new System.Drawing.Point(175, 576);
+            this.labelUploaded.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUploaded.Location = new System.Drawing.Point(177, 553);
             this.labelUploaded.Name = "labelUploaded";
-            this.labelUploaded.Size = new System.Drawing.Size(116, 25);
+            this.labelUploaded.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelUploaded.Size = new System.Drawing.Size(116, 73);
             this.labelUploaded.TabIndex = 11;
-            this.labelUploaded.Text = "@Uploaded";
+            this.labelUploaded.Text = "No";
             // 
-            // buttonViewInPaint
+            // buttonView
             // 
-            this.buttonViewInPaint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonViewInPaint.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonViewInPaint.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.buttonViewInPaint.Location = new System.Drawing.Point(329, 553);
-            this.buttonViewInPaint.Name = "buttonViewInPaint";
-            this.buttonViewInPaint.Size = new System.Drawing.Size(110, 71);
-            this.buttonViewInPaint.TabIndex = 12;
-            this.buttonViewInPaint.Text = "View Image in Paint";
-            this.buttonViewInPaint.UseVisualStyleBackColor = true;
-            this.buttonViewInPaint.Click += new System.EventHandler(this.buttonViewInPaint_Click);
+            this.buttonView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonView.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonView.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.buttonView.Location = new System.Drawing.Point(329, 553);
+            this.buttonView.Name = "buttonView";
+            this.buttonView.Size = new System.Drawing.Size(110, 71);
+            this.buttonView.TabIndex = 12;
+            this.buttonView.Text = "View Image";
+            this.buttonView.UseVisualStyleBackColor = true;
+            this.buttonView.Click += new System.EventHandler(this.buttonView_Click);
             // 
             // buttonNew
             // 
@@ -316,7 +317,7 @@
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonNew);
-            this.Controls.Add(this.buttonViewInPaint);
+            this.Controls.Add(this.buttonView);
             this.Controls.Add(this.labelUploaded);
             this.Controls.Add(this.imageStatusLabel);
             this.Controls.Add(this.uploadImageButton);
@@ -350,7 +351,7 @@
         private System.Windows.Forms.Button uploadImageButton;
         private System.Windows.Forms.Label imageStatusLabel;
         private System.Windows.Forms.Label labelUploaded;
-        private System.Windows.Forms.Button buttonViewInPaint;
+        private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.Button buttonNew;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOpen;

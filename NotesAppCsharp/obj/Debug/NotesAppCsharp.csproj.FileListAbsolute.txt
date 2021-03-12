@@ -22,3 +22,10 @@ C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCs
 C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.CreateUser.resources
 C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.ForgetPassword.resources
 C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.DeleteUser.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\EntityFramework.dll
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\EntityFramework.xml
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.ImageViewer.resources
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.csproj.CopyComplete
+C:\Users\salil\Desktop\Coding Stuf\Notes-App\NotesAppCsharp\obj\Debug\NotesAppCsharp.TPanel.resources

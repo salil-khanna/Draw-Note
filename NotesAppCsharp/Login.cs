@@ -12,6 +12,13 @@ namespace NotesAppCsharp
             InitializeComponent();
         }
 
+        public Login(string user, string pass)
+        {
+            InitializeComponent();
+            textBoxUsername.Text = user;
+            textBoxPassword.Text = pass;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxUsername.Text)) 
@@ -54,13 +61,13 @@ namespace NotesAppCsharp
 
         private void createAccount_Click(object sender, EventArgs e)
         {
-            CreateUser newUserApp = new CreateUser();
+            CreateUser newUserApp = new CreateUser(textBoxUsername.Text, textBoxPassword.Text, this);
             newUserApp.Show();
         }
 
         private void forgetPass_Click(object sender, EventArgs e)
         {
-            ForgetPassword newPasswordApp = new ForgetPassword();
+            ForgetPassword newPasswordApp = new ForgetPassword(textBoxUsername.Text);
             newPasswordApp.Show();
         }
     }

@@ -170,6 +170,7 @@ namespace NotesAppCsharp
             this.MaximumSize = new System.Drawing.Size(600, 450);
             this.MinimumSize = new System.Drawing.Size(600, 450);
             this.Name = "CreateUser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateUser";
             this.ResumeLayout(false);
             this.PerformLayout();
