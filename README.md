@@ -18,5 +18,7 @@ Draw Note allows for the creation of new users, a password forget feature,
                     storage, storing the images as bytes[], as well as saving all of the note text and 
                     user information. The largest challenge was definitely learning how to upload images 
                     to a SQL database!
+        
+ Coded From Feb 2021 - March 2021
                     
                  
