@@ -10,7 +10,7 @@
                     application, <a href="https://youtu.be/oNP--bx7L1k">view this video</a>, otherwise, 
                     a rough description of functionality is as so.
 
-                    Draw Note allows for the creation of new users, a password forget feature, 
+Draw Note allows for the creation of new users, a password forget feature, 
                     the ability to create new notes, save notes, open notes, edit notes, delete notes, 
                     upload images to notes, draw your own images, or even delete a user and all their notes. 
                     C# was used in handling all of the front-end display and inputs, image conversion from images to bytes, 
