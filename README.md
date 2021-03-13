@@ -9,9 +9,7 @@
                     to the application. To get a full sense of all the functionality allowed in this 
                     application, <a href="https://youtu.be/oNP--bx7L1k">view this video</a>, otherwise, 
                     a rough description of functionality is as so.
-                </p>
-                <br>
-                <p>
+
                     Draw Note allows for the creation of new users, a password forget feature, 
                     the ability to create new notes, save notes, open notes, edit notes, delete notes, 
                     upload images to notes, draw your own images, or even delete a user and all their notes. 
