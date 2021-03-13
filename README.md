@@ -19,4 +19,4 @@ Draw Note allows for the creation of new users, a password forget feature,
                     user information. The largest challenge was definitely learning how to upload images 
                     to a SQL database!
                     
-                 </p>
+                 
